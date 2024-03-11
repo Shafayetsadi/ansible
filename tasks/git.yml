@@ -1,18 +1,5 @@
-- name: Git Install
-  apt:
-    name: git
-    state: present
-    update_cache: yes
-  become: true
-  tags:
-  - git
-
 - name: Git setup email
   shell: git config --global user.email "shafayet.sadi@gmail.com"
-  tags: 
-  - git-personal
 
 - name: Git setup name
   shell: git config --global user.name "Shafayet Sadi"
-  tags:
-  - git-personal

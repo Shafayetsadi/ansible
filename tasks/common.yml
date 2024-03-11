@@ -5,6 +5,7 @@
   loop:
     - curl
     - wget
+    - git
     - tmux
     - neovim
     - htop
