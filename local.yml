@@ -1,0 +1,17 @@
+- name: Shafayets Dev Env
+  hosts: localhost
+  connection: local
+  become: true
+  # pre_tasks:
+  #   - name: Update apt cache
+  #     apt: 
+  #       update_cache: yes
+  #       state: latest
+  #     tags:
+  #       - install
+  #       - core
+
+  tasks:
+    # - include_tasks: tasks/common.yml
+    - include_tasks: tasks/git.yml
+    # - include_tasks: tasks/zsh.yml

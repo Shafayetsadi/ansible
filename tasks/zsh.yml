@@ -1,0 +1,38 @@
+- name: Install Zsh
+  become: true
+  ansible.builtin.package:
+    name: zsh
+    state: present
+    update_cache: yes
+  
+
+- name: Change shell to zsh
+  become: true
+  shell: chsh -s $(which zsh)
+
+- name: Check that the shell is zsh
+  command: echo $SHELL
+  register: shell_result
+  failed_when: "'zsh' not in shell_result.stdout"
+
+- name: Check that the somefile.conf exists
+  stat:
+    path: /home/shafayetsadi/.oh-my-zsh
+  register: oh_my_zsh_result
+
+- name: Oh-My-Zsh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  when: oh_my_zsh_result.stat.exists == False
+  become_user: shafayetsadi
+
+- name: Install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+
+- name: Update zshrc
+  lineinfile:
+    path: ~/.zshrc
+    regexp: '^\(git'
+    line: '(git zsh-autosuggestions'
+    state: present

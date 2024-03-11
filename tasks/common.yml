@@ -1,0 +1,14 @@
+- name: Install common packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - curl
+    - wget
+    - tmux
+    - neovim
+    - htop
+    - tree
+    - neofetch
+    - unzip
+    - stow
