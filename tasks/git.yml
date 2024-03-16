@@ -1,3 +1,4 @@
+# This is not working
 - name: Git setup email
   shell: git config --global user.email "shafayet.sadi@gmail.com"
 
